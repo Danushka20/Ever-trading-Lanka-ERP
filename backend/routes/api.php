@@ -23,6 +23,11 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\BackupController;
+use App\Http\Controllers\NotificationSettingController;
+use App\Http\Controllers\SalesAreaReportController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\IncomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +38,11 @@ use App\Http\Controllers\SettingController;
 Route::get('/', function() {
     return response()->json(['message' => 'API is working']);
 });
+
+// PDF Reports
+Route::get('reports/areas/{area}/dealer-performance-pdf', [SalesAreaReportController::class, 'dealerPerformancePdf'])
+    ->name('reports.area-dealer-performance.pdf')
+    ->middleware('auth:sanctum');
 
 // Public Authentication Routes
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -49,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/settings/security/change-password', [AuthController::class, 'changePassword']);
 
     Route::get('/dashboard/stats', [DashboardController::class, 'index']);
 
@@ -81,6 +92,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     // Invoices
     Route::apiResource('invoices', InvoiceController::class);
+    Route::post('invoices/{invoice}/settle', [InvoiceController::class, 'settle']);
     Route::get('invoices-pending', [InvoiceController::class,'pending']);
     Route::get('invoices-confirmed', [InvoiceController::class,'confirmed']);
 
@@ -90,9 +102,14 @@ Route::middleware('auth:sanctum')->group(function(){
     // Bank Accounts
     Route::apiResource('bank-accounts', BankAccountController::class);
 
+    // Expenses & Income
+    Route::apiResource('expenses', ExpenseController::class);
+    Route::apiResource('income', IncomeController::class);
+
     // Reports
     Route::get('reports/sales', [ReportController::class,'salesReport']);
     Route::get('reports/profit-loss', [ReportController::class,'profitLossReport']);
+    Route::get('finance/report/income-statement', [ReportController::class, 'incomeStatement']);
 
     // Items
     Route::apiResource('items', ItemController::class);
@@ -104,9 +121,18 @@ Route::middleware('auth:sanctum')->group(function(){
     // Company Settings
     Route::get('/company-info', [SettingController::class, 'getCompanyInfo']);
     Route::post('/company-info', [SettingController::class, 'updateCompanyInfo']);
+    Route::get('/settings/preferences', [SettingController::class, 'getPreferences']);
+    Route::post('/settings/preferences', [SettingController::class, 'updatePreferences']);
+    Route::get('/settings/notifications', [NotificationSettingController::class, 'index']);
+    Route::post('/settings/notifications', [NotificationSettingController::class, 'update']);
 
     // Units
     Route::apiResource('units', UnitController::class);
+
+    // Backup Routes
+    Route::get('backup', [BackupController::class, 'index']);
+    Route::get('backup/download', [BackupController::class, 'download']);
+    Route::post('backup/restore', [BackupController::class, 'restore']);
 
     // Users & Roles (RBAC)
     Route::apiResource('users', UserController::class);

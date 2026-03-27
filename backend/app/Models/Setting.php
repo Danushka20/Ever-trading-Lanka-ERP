@@ -23,5 +23,11 @@ class Setting extends Model
         'company_tax_id',
         'company_registration_number',
         'company_logo_path',
+        'language',
+        'timezone',
+        'currency',
+        'theme',
+        'date_format',
+        'rows_per_page',
     ];
 }

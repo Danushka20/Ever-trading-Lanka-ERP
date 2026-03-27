@@ -72,7 +72,7 @@ export function Sidebar({ className, isCollapsed, setIsCollapsed }: SidebarProps
           variant="ghost"
           size="icon"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute z-50 hidden w-6 h-6 bg-white dark:bg-slate-900 border rounded-full shadow-sm -right-3 top-24 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-400 hover:text-indigo-600 md:flex"
+          className="absolute z-50 hidden w-6 h-6 bg-white border rounded-full shadow-sm dark:bg-slate-900 -right-3 top-24 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-400 hover:text-indigo-600 md:flex"
         >
           {isCollapsed ? <ChevronRight className="w-3 h-3" /> : <ChevronLeft className="w-3 h-3" />}
         </Button>
@@ -81,7 +81,7 @@ export function Sidebar({ className, isCollapsed, setIsCollapsed }: SidebarProps
       {/* Header */}
       <div className={cn("p-6 flex items-center transition-all duration-300", isCollapsed ? "justify-center" : "px-8")}>
         <Link to="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex items-center justify-center transition-all shadow-lg w-10 h-10 shrink-0 bg-gradient-to-tr from-indigo-600 via-violet-500 to-purple-500 shadow-indigo-500/25 rounded-xl group-hover:scale-110 group-hover:rotate-6">
+          <div className="flex items-center justify-center w-10 h-10 transition-all shadow-lg shrink-0 bg-gradient-to-tr from-indigo-600 via-violet-500 to-purple-500 shadow-indigo-500/25 rounded-xl group-hover:scale-110 group-hover:rotate-6">
             <Package2 className="w-5 h-5 text-white" />
           </div>
           {!isCollapsed && (
@@ -96,15 +96,15 @@ export function Sidebar({ className, isCollapsed, setIsCollapsed }: SidebarProps
       <ScrollArea className="flex-1 px-4">
         {/* User Profile Summary */}
         {user && !isCollapsed && (
-          <div className="px-2 py-4 mb-2 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-white/50 dark:border-slate-800 backdrop-blur-sm">
+          <div className="px-2 py-4 mb-2 border bg-white/40 dark:bg-slate-900/40 rounded-2xl border-white/50 dark:border-slate-800 backdrop-blur-sm">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-9 h-9 transition-all shadow-md bg-gradient-to-br from-indigo-500 to-indigo-700 shadow-indigo-500/20 rounded-lg shrink-0">
+              <div className="flex items-center justify-center transition-all rounded-lg shadow-md w-9 h-9 bg-gradient-to-br from-indigo-500 to-indigo-700 shadow-indigo-500/20 shrink-0">
                 <span className="text-sm font-bold text-white uppercase">
                   {user?.name?.charAt(0) || "U"}
                 </span>
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-none truncate">
+                <span className="text-sm font-semibold leading-none truncate text-slate-900 dark:text-slate-100">
                   {user?.name || "User"}
                 </span>
                 <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1.5 flex items-center gap-1">
@@ -164,7 +164,7 @@ export function Sidebar({ className, isCollapsed, setIsCollapsed }: SidebarProps
                       <LogOut className="w-5 h-5" />
                     </button>
                   </TooltipTrigger>
-                  <TooltipContent side="right" className="bg-rose-600 text-white border-none font-bold text-xs">Sign Out</TooltipContent>
+                  <TooltipContent side="right" className="text-xs font-bold text-white border-none bg-rose-600">Sign Out</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
            </div>
@@ -183,7 +183,7 @@ export function Sidebar({ className, isCollapsed, setIsCollapsed }: SidebarProps
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 mb-3 leading-relaxed">Need assistance with GrowLedger?</p>
                   <button className="w-full py-1.5 bg-indigo-600 text-white text-[10px] font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-all">Documentation</button>
               </div>
-              <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-indigo-500/10 dark:bg-indigo-500/5 blur-2xl group-hover:scale-110 transition-transform"></div>
+              <div className="absolute w-16 h-16 transition-transform -right-4 -bottom-4 bg-indigo-500/10 dark:bg-indigo-500/5 blur-2xl group-hover:scale-110"></div>
           </div>
         </div>
       )}

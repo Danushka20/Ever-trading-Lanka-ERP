@@ -53,6 +53,7 @@ export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   // Additional
   tabs?: React.ReactNode
   toolbar?: React.ReactNode
+  children?: React.ReactNode
   // Styles
   size?: "sm" | "md" | "lg"
   sticky?: boolean
@@ -192,6 +193,7 @@ export function PageHeader({
   filterActive = false,
   tabs,
   toolbar,
+  children,
   size = "md",
   sticky = false,
   bordered = true,
@@ -356,6 +358,9 @@ export function PageHeader({
             )}
 
             {/* Primary Action */}
+            
+            {/* Children for custom actions/buttons */}
+            {children}
             {primaryAction && <ActionButton action={primaryAction} />}
           </div>
         </div>

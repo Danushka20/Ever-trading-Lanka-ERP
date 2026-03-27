@@ -7,7 +7,7 @@ use App\Events\EntityUpdated;
 
 class Invoice extends Model
 {
-    protected $fillable = ['invoice_no', 'user_id', 'sales_area_id', 'customer_name', 'status', 'sub_total', 'discount', 'total', 'invoice_date', 'due_date', 'notes', 'dealer_id'];
+    protected $fillable = ['invoice_no', 'user_id', 'sales_area_id', 'customer_name', 'status', 'sub_total', 'discount', 'total', 'settle_amount', 'invoice_date', 'due_date', 'notes', 'dealer_id'];
 
     protected static function booted()
     {
@@ -17,6 +17,9 @@ class Invoice extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+    public function dealer() {
+        return $this->belongsTo(Dealer::class);
     }
     public function salesArea() {
         return $this->belongsTo(SalesArea::class);

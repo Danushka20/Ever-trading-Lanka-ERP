@@ -106,6 +106,65 @@ class SettingController extends Controller
     }
 
     /**
+     * Get app preferences.
+     */
+    public function getPreferences()
+    {
+        $setting = Setting::first();
+        
+        if (!$setting) {
+            return response()->json([
+                'language' => 'en',
+                'timezone' => 'UTC',
+                'currency' => 'LKR',
+                'theme' => 'system',
+                'dateFormat' => 'YYYY-MM-DD',
+                'rowsPerPage' => 10,
+            ]);
+        }
+
+        return response()->json([
+            'language' => $setting->language ?? 'en',
+            'timezone' => $setting->timezone ?? 'UTC',
+            'currency' => $setting->currency ?? 'LKR',
+            'theme' => $setting->theme ?? 'system',
+            'dateFormat' => $setting->date_format ?? 'YYYY-MM-DD',
+            'rowsPerPage' => (int)($setting->rows_per_page ?? 10),
+        ]);
+    }
+
+    /**
+     * Update app preferences.
+     */
+    public function updatePreferences(Request $request)
+    {
+        $request->validate([
+            'language' => 'nullable|string',
+            'timezone' => 'nullable|string',
+            'currency' => 'nullable|string',
+            'theme' => 'nullable|string',
+            'dateFormat' => 'nullable|string',
+            'rowsPerPage' => 'nullable|integer',
+        ]);
+
+        $setting = Setting::firstOrNew();
+
+        if ($request->has('language')) $setting->language = $request->language;
+        if ($request->has('timezone')) $setting->timezone = $request->timezone;
+        if ($request->has('currency')) $setting->currency = $request->currency;
+        if ($request->has('theme')) $setting->theme = $request->theme;
+        if ($request->has('dateFormat')) $setting->date_format = $request->dateFormat;
+        if ($request->has('rowsPerPage')) $setting->rows_per_page = $request->rowsPerPage;
+
+        $setting->save();
+
+        return response()->json([
+            'message' => 'Preferences updated successfully',
+            'data' => $this->getPreferences()->original
+        ]);
+    }
+
+    /**
      * Get the company logo as a file with CORS headers.
      * Supports PNG, JPG, JPEG, GIF, WebP formats.
      */

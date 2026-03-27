@@ -1,6 +1,6 @@
-import { Building2, Sliders, Bell, Lock, Users, HelpCircle } from 'lucide-react'
+import { Building2, Sliders, Bell, Lock, Users, HelpCircle, Database } from 'lucide-react'
 import type { ComponentType, SVGAttributes } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 
 type LucideIcon = ComponentType<SVGAttributes<SVGElement>>
 
@@ -46,6 +46,12 @@ const SETTINGS_ITEMS: SettingsNavItem[] = [
     label: 'Team Management',
     icon: Users,
     description: 'Members & permissions',
+  },
+  {
+    id: 'backup',
+    label: 'Database Backup',
+    icon: Database,
+    description: 'System data & exports',
   },
   {
     id: 'help',

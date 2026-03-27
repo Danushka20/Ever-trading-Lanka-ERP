@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Building2, Mail, Phone, MapPin, Globe, Save, AlertCircle, Upload, Download, X, FileText, Image as ImageIcon, CheckCircle2, Clock } from 'lucide-react'
+import { CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { Save, Upload, Download, X, Image as ImageIcon, CheckCircle2, Clock, MapPin, FileText } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 export interface CompanyData {

@@ -38,6 +38,11 @@ class Dealer extends Model
     }
 
     // Optionally calculate balance from transactions, but for now using the cached field for simplicity
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'dealer_id');
+    }
+
     public function salesOrders()
     {
         return $this->hasMany(SalesOrder::class, 'dealer_id');

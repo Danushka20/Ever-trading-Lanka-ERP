@@ -7,7 +7,7 @@ use App\Events\EntityUpdated;
 
 class InvoiceItem extends Model
 {
-    protected $fillable = ['invoice_id', 'item_id', 'batch_no', 'qty', 'unit_price', 'total'];
+    protected $fillable = ['invoice_id', 'item_id', 'batch_no', 'description', 'qty', 'unit_price', 'total'];
 
     protected static function booted()
     {
@@ -16,7 +16,7 @@ class InvoiceItem extends Model
     }
 
     public function item() {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class, 'item_id');
     }
     public function invoice() {
         return $this->belongsTo(Invoice::class);

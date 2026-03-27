@@ -88,4 +88,18 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Password reset link sent to your email']);
     }
+
+    public function changePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $user = $request->user();
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        return response()->json(['message' => 'Password changed successfully']);
+    }
 }

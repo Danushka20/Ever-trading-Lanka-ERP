@@ -32,6 +32,7 @@ export interface DateRangePickerProps {
   minDate?: Date
   maxDate?: Date
   className?: string
+  clearable?: boolean
 }
 
 // Helper functions
@@ -314,6 +315,7 @@ export function DateRangePicker({
   minDate,
   maxDate,
   className,
+  clearable = true,
 }: DateRangePickerProps) {
   const [isOpen, setIsOpen] = React.useState(false)
   const [selecting, setSelecting] = React.useState<"start" | "end">("start")
@@ -353,6 +355,12 @@ export function DateRangePicker({
     }
   }
 
+  const handleClear = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onChange?.(null, null)
+    setSelecting("start")
+  }
+
   const displayValue =
     startDate && endDate
       ? `${formatDate(startDate, "MMM dd")} - ${formatDate(endDate, "MMM dd, yyyy")}`
@@ -376,7 +384,17 @@ export function DateRangePicker({
           disabled={disabled}
           className="pr-10 cursor-pointer"
         />
-        <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+          {clearable && (startDate || endDate) && (
+            <button
+              onClick={handleClear}
+              className="p-0.5 hover:bg-slate-100 rounded-full transition-colors"
+            >
+              <X className="h-3.5 w-3.5 text-slate-400 hover:text-slate-600" />
+            </button>
+          )}
+          <Calendar className="h-4 w-4 text-slate-400" />
+        </div>
       </div>
 
       {isOpen && (

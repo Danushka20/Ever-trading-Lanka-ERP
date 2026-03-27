@@ -6,6 +6,7 @@ import {
   BarChart3,
   Settings,
   Package2,
+  Wallet,
 } from "lucide-react"
 
 import type { ComponentType } from "react"
@@ -31,14 +32,22 @@ export interface NavSection {
 
 export const navSections: NavSection[] = [
   {
-    section: "Overview",
+    section: "Main",
     items: [
       { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
     ],
   },
   {
-    section: "Sales & Invoicing",
+    section: "Sales & CRM",
     items: [
+      { 
+        label: "Dealers", 
+        icon: Users, 
+        subItems: [
+          { label: "All Dealers", href: "/dealers" },
+          { label: "Area Network", href: "/dealers/area-network" },
+        ] 
+      },
       {
         label: "Sales",
         icon: ShoppingCart,
@@ -49,7 +58,7 @@ export const navSections: NavSection[] = [
         ],
       },
       {
-        label: "Invoice",
+        label: "Invoices",
         icon: BarChart3,
         subItems: [
           { label: "All Invoices", href: "/sales/invoice-list" },
@@ -59,10 +68,11 @@ export const navSections: NavSection[] = [
     ],
   },
   {
-    section: "Purchasing",
+    section: "Procurement",
     items: [
+      { label: "Suppliers", icon: Users, href: "/suppliers" },
       {
-        label: "Purchase",
+        label: "Purchases",
         icon: ShoppingCart,
         subItems: [
           { label: "Purchase List", href: "/purchase/list" },
@@ -75,36 +85,43 @@ export const navSections: NavSection[] = [
     section: "Inventory",
     items: [
       {
-        label: "Stock",
-        icon: Package2,
-        subItems: [
-          { label: "Stock List", href: "/stock/list" },
-          { label: "Stock Summary", href: "/stock/summary" },
-          { label: "Stock Report", href: "/inventory/stock-report" },
-        ],
-      },
-      {
-        label: "Items",
+        label: "Items Catalog",
         icon: Package,
         subItems: [
           { label: "All Items", href: "/inventory/items" },
         ],
       },
+      {
+        label: "Stock Handling",
+        icon: Package2,
+        subItems: [
+          { label: "Stock List", href: "/stock/list" },
+          { label: "Stock Summary", href: "/stock/summary" },
+        ],
+      },
     ],
   },
   {
-    section: "Partners",
+    section: "Finance & Reports",
     items: [
-      { label: "Dealer", icon: Users, href: "/dealers" },
-      { label: "Supplier", icon: Users, href: "/suppliers" },
+      { label: "Income Statement", icon: BarChart3, href: "/finance/income-statement" },
+      { label: "Profit & Loss", icon: BarChart3, href: "/reports/profit-loss" },
+      { 
+        label: "Cash Flow", 
+        icon: Wallet,
+        subItems: [
+          { label: "Income", href: "/finance/income" },
+          { label: "Expenses", href: "/finance/expenses" },
+        ]
+      },
     ],
   },
   {
-    section: "Administrative",
+    section: "Administration",
     items: [
-      { label: "User", icon: Users, href: "/users" },
-      { label: "Roles", icon: Settings, href: "/users/roles" },
-      { label: "Settings", icon: Settings, href: "/settings" },
+      { label: "User Management", icon: Users, href: "/users" },
+      { label: "Access Control", icon: Settings, href: "/users/roles" },
+      { label: "System Settings", icon: Settings, href: "/settings" },
     ],
   },
 ]

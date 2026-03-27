@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 export default function SalesList() {
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
+    <div className="flex-1 p-8 pt-6 space-y-4">
       <PageHeader title="Sales List" description="View and manage all previous sales transactions" />
       <Card className="border-none shadow-sm">
         <CardContent className="p-8">

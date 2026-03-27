@@ -7,6 +7,7 @@ import { NotificationsSection } from './settings/NotificationsSection'
 import { SecuritySection } from './settings/SecuritySection'
 import { TeamSection } from './settings/TeamSection'
 import { HelpSection } from './settings/HelpSection'
+import { BackupSection } from './settings/BackupSection'
 import type { CompanyData } from './settings/CompanyInfoForm'
 import { PageHeader } from "@/components/ui/page-header"
 
@@ -140,6 +141,8 @@ export function Settings() {
                 {activeTab === 'security' && <SecuritySection />}
 
                 {activeTab === 'team' && <TeamSection />}
+
+                {activeTab === 'backup' && <BackupSection />}
 
                 {activeTab === 'help' && <HelpSection />}
               </div>

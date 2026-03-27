@@ -80,6 +80,7 @@ export interface DBInvoice extends DBBase {
   total: number | string;
   sub_total?: number | string;
   discount?: number | string;
+  settle_amount?: number | string;
   invoice_date?: string;
   due_date?: string;
   notes?: string;
@@ -133,3 +134,12 @@ export interface DBSalesTarget extends DBBase {
   month?: number;
   year?: number;
 }
+
+export interface ChartData {
+  month: string;
+  fullMonth: string;
+  target: number;
+  actual: number;
+  achievement: number;
+}
+
